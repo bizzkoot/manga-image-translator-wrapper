@@ -1,0 +1,28 @@
+{
+  "translator": {
+    "translator": "none",
+    "target_lang": "ENG"
+  },
+  "detector": {
+    "detector": "ctd",
+    "detection_size": 1280
+  },
+  "inpainter": {
+    "inpainter": "original",
+    "inpainting_size": 1024,
+    "inpainting_precision": "fp16"
+  },
+  "ocr": {
+    "ocr": "48px"
+  },
+  "render": {
+    "renderer": "manga2eng_pillow",
+    "alignment": "center",
+    "direction": "horizontal",
+    "no_hyphenation": true,
+    "line_spacing": null,
+    "font_size_minimum": 16,
+    "font_size_offset": -2
+  }
+}
+

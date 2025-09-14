@@ -1,0 +1,71 @@
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Editor swap files
+*.swp
+*.swo
+
+# Virtual envs
+.venv/
+venv/
+env/
+
+# Local caches and temp
+.cache/
+*.log
+terminal_log.txt
+
+# Project outputs (generated)
+samples_in/
+samples_out/
+samples_out_extract/
+aggregated/
+
+# Models and large artifacts
+models/
+
+# Upstream third_party checkout (created by bootstrap)
+third_party/
+Try*/
+
+# Node/mermaid artifacts (optional)
+node_modules/
+docs/diagrams/png/
+
+# Tooling
+.idea/
+.vscode/
+
+# Env files (local overrides)
+*.env.local
+*.envrc
+*.bak
+*.backup
+*.orig
+
+# Allowlist: keep needed scripts/configs/templates
+!scripts/**
+!docs/**
+!README.md
+!PROGRESS.md
+!LICENSE
+!*.md
+!dicts/
+
+# But ignore user-edited dicts content while keeping the folder
+dicts/*.txt
+!dicts/README*
+!dicts/*.example
+
+PROGRESS.md
+terminal_log.txt

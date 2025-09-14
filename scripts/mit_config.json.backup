@@ -1,0 +1,543 @@
+(.venv) muhammadfaiz@Muhammads-MacBook-Air manga_translate % bash scripts/mit_run.sh --use-gpu-limited
++ '/Users/muhammadfaiz/Custom APP/manga_translate/.venv/bin/python' -m manga_translator local -i ./samples_in -o ./samples_out --config-file scripts/mit_config.json --use-gpu-limited
+[local] Running in local mode
+[local] Log file created: /Users/muhammadfaiz/Custom APP/manga_translate/third_party/manga-image-translator/result/log_20250913084114.txt
+[local] Skipping as already translated: "/Users/muhammadfaiz/Custom APP/manga_translate/samples_out/001.jpg". Use --overwrite to overwrite existing translations.
+[local] Skipping as already translated: "/Users/muhammadfaiz/Custom APP/manga_translate/samples_out/002.jpg". Use --overwrite to overwrite existing translations.
+[local] Skipping as already translated: "/Users/muhammadfaiz/Custom APP/manga_translate/samples_out/003.jpg". Use --overwrite to overwrite existing translations.
+[local] Skipping as already translated: "/Users/muhammadfaiz/Custom APP/manga_translate/samples_out/004.jpg". Use --overwrite to overwrite existing translations.
+[local] Skipping as already translated: "/Users/muhammadfaiz/Custom APP/manga_translate/samples_out/005.jpg". Use --overwrite to overwrite existing translations.
+[local] Skipping as already translated: "/Users/muhammadfaiz/Custom APP/manga_translate/samples_out/006.jpg". Use --overwrite to overwrite existing translations.
+[local] Translating: "/Users/muhammadfaiz/Custom APP/manga_translate/samples_in/007.jpg"
+[local] Loading models
+
+Downloading models into /Users/muhammadfaiz/Custom APP/manga_translate/third_party/manga-image-translator/models/translators/m2m_100
+
+ -- Downloading: "https://github.com/zyddnys/manga-image-translator/releases/download/beta-0.3/m2m100_418m_ct2.zip"
+m2m100_418m_ct2.zip: 100%|████████████████| 438M/438M [02:53<00:00, 2.64MiB/s]
+ -- Verifying: "/var/folders/nv/bw07_xln537f8_zpc5qlp1_00000gn/T/manga-image-translator/m2m100translator/models/m2m100_418m_ct2.zip"
+ -- Verifying: OK!
+ -- Extracting files
+
+[local] Running text detection
+[local] Running ocr
+[Model48pxOCR] prob: 0.9482468366622925 A.I.프로그램, fg: (2, 1, 1) bg: (2, 1, 1)
+[Model48pxOCR] prob: 0.998053252696991 수혁이가만들고 fg: (2, 3, 1) bg: (2, 3, 1)
+[Model48pxOCR] prob: 0.7824274301528931 챙기긴뭘챙겨? fg: (9, 5, 4) bg: (9, 5, 4)
+[Model48pxOCR] prob: 0.9921683073043823 분석한거아냐? fg: (2, 0, 0) bg: (2, 0, 0)
+[local] No pre-translation replacements made.
+[local] Running text translation
+[M2M100Translator] Translating into English
+[M2M100Translator] 0: 챙기긴뭘챙겨? A.I.프로그램, 수혁이가만들고 분석한거아냐? => What do you have to take on? A. I.-Programme, Reforms and Analysis Are You Reached And Analyzed?
+[local] No post-translation replacements made.
+[local] Starting post-translation check...
+[local] Skipping page-level target language check: only 1 regions (threshold: 5)
+[local] All translation regions passed post-translation check.
+[local] Running mask refinement
+[mask]: 100%|██████████████████████████████████| 4/4 [00:00<00:00, 209.72it/s]
+[LamaLargeInpainter] Inpainting resolution: 448x1024
+[local] Running rendering
+[render]: 100%|█████████████████████████████████| 1/1 [00:00<00:00,  4.23it/s]
+[local] Saving "/Users/muhammadfaiz/Custom APP/manga_translate/samples_out/007.jpg"
+[local] Translating: "/Users/muhammadfaiz/Custom APP/manga_translate/samples_in/008.jpg"
+[local] Loading models
+[local] Running text detection
+[local] Running ocr
+[Model48pxOCR] prob: 0.9966486692428589 네? fg: (0, 1, 3) bg: (0, 1, 3)
+[Model48pxOCR] prob: 0.9980471134185791 어떡해요? fg: (4, 4, 3) bg: (4, 4, 3)
+[Model48pxOCR] prob: 0.6645748019218445 그러니깨 fg: (2, 2, 1) bg: (2, 2, 1)
+[Model48pxOCR] prob: 0.96729975938797 신규임용도 fg: (3, 4, 3) bg: (3, 4, 3)
+[Model48pxOCR] prob: 0.9987608790397644 교수못되면 fg: (3, 2, 1) bg: (3, 2, 1)
+[Model48pxOCR] prob: 0.9827262759208679 과내교수의견 fg: (3, 2, 0) bg: (3, 2, 0)
+[Model48pxOCR] prob: 0.8929548859596252 그러다수혁0 fg: (4, 3, 1) bg: (4, 3, 1)
+[Model48pxOCR] prob: 0.967434287071228 더더욱나가야지 fg: (3, 4, 0) bg: (3, 4, 0)
+[Model48pxOCR] prob: 0.5584370493888855 반영해야되는데.. fg: (3, 2, 1) bg: (3, 2, 1)
+[Model48pxOCR] prob: 0.9825679659843445 원장단도어찌됐든 fg: (2, 3, 2) bg: (2, 3, 2)
+[Model48pxOCR] prob: 0.7968714237213135 교수회의통해서결정되고 fg: (2, 2, 0) bg: (2, 2, 0)
+[local] No pre-translation replacements made.
+[local] Running text translation
+[M2M100Translator] Translating into English
+[M2M100Translator] 0: 그러다수혁0 교수못되면 어떡해요? => What if there is no reform in teaching?
+[M2M100Translator] 1: 신규임용도 교수회의통해서결정되고 원장단도어찌됐든 과내교수의견 반영해야되는데.. => The new appointment must be decided by the faculty council, and whether it is a primary committee or any other executive professor's opinion should reflect.
+[M2M100Translator] 2: 그러니깨 더더욱나가야지 => Therefore, it is especially necessary to go.
+[M2M100Translator] 3: 네? => Yes yes?
+[local] No post-translation replacements made.
+[local] Starting post-translation check...
+[local] Skipping page-level target language check: only 4 regions (threshold: 5)
+[local] All translation regions passed post-translation check.
+[local] Running mask refinement
+[mask]: 100%|████████████████████████████████| 11/11 [00:00<00:00, 335.16it/s]
+[LamaLargeInpainter] Inpainting resolution: 448x1024
+[local] Running rendering
+[render]: 100%|█████████████████████████████████| 4/4 [00:00<00:00,  8.34it/s]
+[local] Saving "/Users/muhammadfaiz/Custom APP/manga_translate/samples_out/008.jpg"
+[local] Translating: "/Users/muhammadfaiz/Custom APP/manga_translate/samples_in/009.jpg"
+[local] Loading models
+[local] Running text detection
+[local] Running ocr
+[Model48pxOCR] prob: 0.9963508248329163 아,네. fg: (4, 5, 5) bg: (4, 5, 5)
+[Model48pxOCR] prob: 0.9974126219749451 아무튼, fg: (4, 9, 8) bg: (4, 9, 8)
+[Model48pxOCR] prob: 0.9773645401000977 괜찮긴한데.. fg: (5, 3, 4) bg: (5, 3, 4)
+[Model48pxOCR] prob: 0.9425783753395081 수혁이시간이링 fg: (2, 2, 1) bg: (2, 2, 1)
+[Model48pxOCR] prob: 0.9907031059265137 체력괜찮은거지? fg: (4, 2, 3) bg: (4, 2, 3)
+[local] No pre-translation replacements made.
+[local] Running text translation
+[M2M100Translator] Translating into English
+[M2M100Translator] 0: 아무튼, 수혁이시간이링 체력괜찮은거지? => Anyway, the change in time fitness is okay?
+[M2M100Translator] 1: 아,네. 괜찮긴한데.. => Oh yeah, it’s okay.
+[local] No post-translation replacements made.
+[local] Starting post-translation check...
+[local] Skipping page-level target language check: only 2 regions (threshold: 5)
+[local] All translation regions passed post-translation check.
+[local] Running mask refinement
+[mask]: 100%|██████████████████████████████████| 5/5 [00:00<00:00, 327.29it/s]
+[LamaLargeInpainter] Inpainting resolution: 448x1024
+[local] Running rendering
+[render]: 100%|█████████████████████████████████| 2/2 [00:00<00:00,  9.35it/s]
+[local] Saving "/Users/muhammadfaiz/Custom APP/manga_translate/samples_out/009.jpg"
+[local] Translating: "/Users/muhammadfaiz/Custom APP/manga_translate/samples_in/010.jpg"
+[local] Loading models
+[local] Running text detection
+[local] Running ocr
+[Model48pxOCR] prob: 0.5028099417686462 수혁아. fg: (5, 5, 2) bg: (6, 7, 3)
+[Model48pxOCR] prob: 0.9814189076423645 낼거잖아 fg: (4, 4, 3) bg: (4, 4, 3)
+[Model48pxOCR] prob: 0.717029869556427 괜찮은건가…? fg: (6, 4, 3) bg: (6, 4, 3)
+[Model48pxOCR] prob: 0.8959123492240906 너그프로그램 fg: (1, 3, 2) bg: (1, 3, 2)
+[Model48pxOCR] prob: 0.8732395768165588 정말내가나가되 fg: (2, 4, 1) bg: (2, 4, 1)
+[Model48pxOCR] prob: 0.9879902005195618 파이자콘퍼런스에 fg: (3, 1, 1) bg: (3, 1, 1)
+[Model48pxOCR] prob: 0.34523293375968933 뉴스에나간다고 fg: (2, 0, 0) bg: (2, 0, 0)
+[local] No pre-translation replacements made.
+[local] Running text translation
+[M2M100Translator] Translating into English
+[M2M100Translator] 0: 뉴스에나간다고 => It comes in the news.
+[M2M100Translator] 1: 정말내가나가되 괜찮은건가…? => I’m really going to go, is it okay...?
+[M2M100Translator] 2: 수혁아. 너그프로그램 파이자콘퍼런스에 낼거잖아 => Your program will be presented at the Pizza Conference.
+[local] No post-translation replacements made.
+[local] Starting post-translation check...
+[local] Skipping page-level target language check: only 3 regions (threshold: 5)
+[local] All translation regions passed post-translation check.
+[local] Running mask refinement
+[mask]: 100%|██████████████████████████████████| 7/7 [00:00<00:00, 283.75it/s]
+[LamaLargeInpainter] Inpainting resolution: 448x1024
+[local] Running rendering
+[render]: 100%|█████████████████████████████████| 3/3 [00:00<00:00,  6.29it/s]
+[local] Saving "/Users/muhammadfaiz/Custom APP/manga_translate/samples_out/010.jpg"
+[local] Translating: "/Users/muhammadfaiz/Custom APP/manga_translate/samples_in/011.jpg"
+[local] Loading models
+[local] Running text detection
+[local] Running ocr
+[Model48pxOCR] prob: 0.9971492290496826 솔직히 fg: (7, 5, 5) bg: (7, 5, 5)
+[Model48pxOCR] prob: 0.4549867808818817 아,네 fg: (6, 4, 1) bg: (6, 4, 1)
+[Model48pxOCR] prob: 0.9984530210494995 의학자입장에선 fg: (5, 3, 2) bg: (5, 3, 2)
+[Model48pxOCR] prob: 0.9954282641410828 프로그램얘기들으면 fg: (0, 1, 0) bg: (0, 1, 0)
+[Model48pxOCR] prob: 0.5034464597702026 아,좋을수도있겠대 fg: (2, 0, 1) bg: (2, 0, 1)
+[Model48pxOCR] prob: 0.7136464715003967 조금편해지겠다. 정도의 fg: (2, 1, 1) bg: (2, 1, 1)
+[local] No pre-translation replacements made.
+[local] Running text translation
+[M2M100Translator] Translating into English
+[M2M100Translator] 0: 아,네 => Oh yeah, yes
+[M2M100Translator] 1: 솔직히 의학자입장에선 프로그램얘기들으면 => To be honest, if you talk about the program in a medical institution
+[M2M100Translator] 2: 아,좋을수도있겠대 => Oh, it might be good.
+[M2M100Translator] 3: 조금편해지겠다. 정도의 => It will be a little comfortable, enough.
+[local] No post-translation replacements made.
+[local] Starting post-translation check...
+[local] Skipping page-level target language check: only 4 regions (threshold: 5)
+[local] All translation regions passed post-translation check.
+[local] Running mask refinement
+[mask]: 100%|██████████████████████████████████| 6/6 [00:00<00:00, 286.10it/s]
+[LamaLargeInpainter] Inpainting resolution: 448x1024
+[local] Running rendering
+[render]: 100%|█████████████████████████████████| 4/4 [00:00<00:00,  8.69it/s]
+[local] Saving "/Users/muhammadfaiz/Custom APP/manga_translate/samples_out/011.jpg"
+[local] Translating: "/Users/muhammadfaiz/Custom APP/manga_translate/samples_in/012.jpg"
+[local] Loading models
+[local] Running text detection
+[local] Running ocr
+[Model48pxOCR] prob: 0.7758073806762695 너도 fg: (9, 7, 4) bg: (9, 7, 4)
+[Model48pxOCR] prob: 0.9938196539878845 감상만들거든 fg: (2, 2, 1) bg: (2, 2, 1)
+[Model48pxOCR] prob: 0.9959335923194885 의료진편의를위해서 fg: (3, 4, 1) bg: (3, 4, 1)
+[Model48pxOCR] prob: 0.9807848334312439 그런생각에서낸거지? fg: (2, 0, 0) bg: (2, 0, 0)
+[local] No pre-translation replacements made.
+[local] Running text translation
+[M2M100Translator] Translating into English
+[M2M100Translator] 0: 감상만들거든 => If you feel the feeling.
+[M2M100Translator] 1: 너도 그런생각에서낸거지? 의료진편의를위해서 => Do you think that’s the same thing? for medical treatment.
+[local] No post-translation replacements made.
+[local] Starting post-translation check...
+[local] Skipping page-level target language check: only 2 regions (threshold: 5)
+[local] All translation regions passed post-translation check.
+[local] Running mask refinement
+[mask]: 100%|██████████████████████████████████| 4/4 [00:00<00:00, 242.33it/s]
+[LamaLargeInpainter] Inpainting resolution: 448x1024
+[local] Running rendering
+[render]: 100%|█████████████████████████████████| 2/2 [00:00<00:00,  6.59it/s]
+[local] Saving "/Users/muhammadfaiz/Custom APP/manga_translate/samples_out/012.jpg"
+[local] Translating: "/Users/muhammadfaiz/Custom APP/manga_translate/samples_in/013.jpg"
+[local] Loading models
+[local] Running text detection
+[local] Running ocr
+[Model48pxOCR] prob: 0.8721703886985779 그렇죠 fg: (3, 5, 4) bg: (3, 5, 4)
+[Model48pxOCR] prob: 0.9990649819374084 일이라고. fg: (5, 5, 1) bg: (5, 5, 1)
+[Model48pxOCR] prob: 0.9896132946014404 다마비될뻔한 fg: (7, 8, 5) bg: (7, 8, 5)
+[Model48pxOCR] prob: 0.9937911629676819 수도권병원들 fg: (7, 7, 5) bg: (7, 7, 5)
+[Model48pxOCR] prob: 0.8679042458534241 집단 감염 이 fg: (3, 1, 0) bg: (3, 1, 0)
+[Model48pxOCR] prob: 0.9011158347129822 보통일이아냐 fg: (1, 2, 0) bg: (1, 2, 0)
+[Model48pxOCR] prob: 0.9862632155418396 근데이번에봐라? fg: (2, 1, 1) bg: (2, 1, 1)
+[local] No pre-translation replacements made.
+[local] Running text translation
+[M2M100Translator] Translating into English
+[M2M100Translator] 0: 그렇죠 => Yes yes.
+[M2M100Translator] 1: 근데이번에봐라? 집단 감염 이 보통일이아냐 => Is this not a normal group infection?
+[M2M100Translator] 2: 수도권병원들 다마비될뻔한 일이라고. => Hospitals are almost damaged.
+[local] No post-translation replacements made.
+[local] Starting post-translation check...
+[local] Skipping page-level target language check: only 3 regions (threshold: 5)
+[local] All translation regions passed post-translation check.
+[local] Running mask refinement
+[mask]: 100%|██████████████████████████████████| 7/7 [00:00<00:00, 324.09it/s]
+[LamaLargeInpainter] Inpainting resolution: 448x1024
+[local] Running rendering
+[render]: 100%|█████████████████████████████████| 3/3 [00:00<00:00,  9.15it/s]
+[local] Saving "/Users/muhammadfaiz/Custom APP/manga_translate/samples_out/013.jpg"
+[local] Translating: "/Users/muhammadfaiz/Custom APP/manga_translate/samples_in/014.jpg"
+[local] Loading models
+[local] Running text detection
+[local] Running ocr
+[Model48pxOCR] prob: 0.9198843836784363 이번 일은 fg: (2, 3, 2) bg: (1, 3, 2)
+[Model48pxOCR] prob: 0.6112898588180542 집중할거고… fg: (2, 1, 1) bg: (2, 1, 1)
+[Model48pxOCR] prob: 0.9951834082603455 방지해준거야. fg: (1, 1, 0) bg: (1, 1, 0)
+[Model48pxOCR] prob: 0.9944822192192078 네가그걸미연에 fg: (1, 0, 0) bg: (1, 0, 0)
+[Model48pxOCR] prob: 0.9826798439025879 그럼파이자에서도 fg: (1, 1, 0) bg: (1, 1, 0)
+[Model48pxOCR] prob: 0.9895340204238892 세계적으로알려야해 fg: (1, 0, 0) bg: (1, 0, 0)
+[local] No pre-translation replacements made.
+[local] Running text translation
+[M2M100Translator] Translating into English
+[M2M100Translator] 0: 네가그걸미연에 방지해준거야. => You have prevented it from neglightening.
+[M2M100Translator] 1: 이번 일은 세계적으로알려야해 그럼파이자에서도 집중할거고… => This must be known worldwide, and we will also focus on the Grumpy...
+[local] No post-translation replacements made.
+[local] Starting post-translation check...
+[local] Skipping page-level target language check: only 2 regions (threshold: 5)
+[local] All translation regions passed post-translation check.
+[local] Running mask refinement
+[mask]: 100%|██████████████████████████████████| 6/6 [00:00<00:00, 254.84it/s]
+[LamaLargeInpainter] Inpainting resolution: 448x1024
+[local] Running rendering
+[render]: 100%|█████████████████████████████████| 2/2 [00:00<00:00,  7.92it/s]
+[local] Saving "/Users/muhammadfaiz/Custom APP/manga_translate/samples_out/014.jpg"
+[local] Translating: "/Users/muhammadfaiz/Custom APP/manga_translate/samples_in/015.jpg"
+[local] Loading models
+[local] Running text detection
+[local] Running ocr
+[Model48pxOCR] prob: 0.5006886720657349 그럼 fg: (4, 6, 4) bg: (4, 6, 4)
+[Model48pxOCR] prob: 0.8266644477844238 깔릴수도있어. fg: (4, 2, 2) bg: (4, 2, 2)
+[Model48pxOCR] prob: 0.7908505797386169 갑이되는거야. fg: (4, 1, 0) bg: (5, 3, 0)
+[Model48pxOCR] prob: 0.9962421655654907 너는이병원에서 fg: (0, 1, 0) bg: (0, 1, 0)
+[local] No pre-translation replacements made.
+[local] Running text translation
+[M2M100Translator] Translating into English
+[M2M100Translator] 0: 깔릴수도있어. => It can be cleaned.
+[M2M100Translator] 1: 그럼 너는이병원에서 갑이되는거야. => Then you’re going to get out of the hospital.
+[local] No post-translation replacements made.
+[local] Starting post-translation check...
+[local] Skipping page-level target language check: only 2 regions (threshold: 5)
+[local] All translation regions passed post-translation check.
+[local] Running mask refinement
+[mask]: 100%|██████████████████████████████████| 4/4 [00:00<00:00, 291.63it/s]
+[LamaLargeInpainter] Inpainting resolution: 448x1024
+[local] Running rendering
+[render]: 100%|█████████████████████████████████| 2/2 [00:00<00:00,  9.12it/s]
+[local] Saving "/Users/muhammadfaiz/Custom APP/manga_translate/samples_out/015.jpg"
+[local] Translating: "/Users/muhammadfaiz/Custom APP/manga_translate/samples_in/016.jpg"
+[local] Loading models
+[local] Running text detection
+[local] Running ocr
+[Model48pxOCR] prob: 0.9202722907066345 형… fg: (4, 1, 1) bg: (4, 1, 1)
+[local] No pre-translation replacements made.
+[local] Running text translation
+[M2M100Translator] Translating into English
+[M2M100Translator] 0: 형… => Brother...
+[local] No post-translation replacements made.
+[local] Starting post-translation check...
+[local] Skipping page-level target language check: only 1 regions (threshold: 5)
+[local] All translation regions passed post-translation check.
+[local] Running mask refinement
+[mask]: 100%|██████████████████████████████████| 1/1 [00:00<00:00, 801.97it/s]
+[LamaLargeInpainter] Inpainting resolution: 448x1024
+[local] Running rendering
+[render]: 100%|█████████████████████████████████| 1/1 [00:00<00:00,  8.80it/s]
+[local] Saving "/Users/muhammadfaiz/Custom APP/manga_translate/samples_out/016.jpg"
+[local] Translating: "/Users/muhammadfaiz/Custom APP/manga_translate/samples_in/017.jpg"
+[local] Loading models
+[local] Running text detection
+[local] Running ocr
+[Model48pxOCR] prob: 0.90538489818573 아… fg: (1, 4, 1) bg: (1, 4, 1)
+[Model48pxOCR] prob: 0.629876434803009 그렇구나 fg: (4, 3, 0) bg: (4, 3, 0)
+[Model48pxOCR] prob: 0.994304358959198 펼쳐지진않는다. fg: (4, 1, 0) bg: (4, 1, 0)
+[Model48pxOCR] prob: 0.9789146780967712 바로장밋빛미래가 fg: (4, 4, 2) bg: (4, 4, 2)
+[Model48pxOCR] prob: 0.9933255314826965 전임을받는다고해서 fg: (1, 2, 0) bg: (1, 2, 0)
+[local] No pre-translation replacements made.
+[local] Running text translation
+[M2M100Translator] Translating into English
+[M2M100Translator] 0: 아… 그렇구나 => Oh... yeah, yes.
+[M2M100Translator] 1: 전임을받는다고해서 바로장밋빛미래가 펼쳐지진않는다. => As a result of this, the future will not be opened.
+[local] No post-translation replacements made.
+[local] Starting post-translation check...
+[local] Skipping page-level target language check: only 2 regions (threshold: 5)
+[local] All translation regions passed post-translation check.
+[local] Running mask refinement
+[mask]: 100%|██████████████████████████████████| 5/5 [00:00<00:00, 283.46it/s]
+[LamaLargeInpainter] Inpainting resolution: 448x1024
+[local] Running rendering
+[render]: 100%|█████████████████████████████████| 2/2 [00:00<00:00,  9.03it/s]
+[local] Saving "/Users/muhammadfaiz/Custom APP/manga_translate/samples_out/017.jpg"
+[local] Translating: "/Users/muhammadfaiz/Custom APP/manga_translate/samples_in/018.jpg"
+[local] Loading models
+[local] Running text detection
+[local] Running ocr
+[Model48pxOCR] prob: 0.9907074570655823 그마저도 fg: (3, 3, 0) bg: (3, 3, 0)
+[Model48pxOCR] prob: 0.9983400702476501 부교수가되면 fg: (1, 1, 0) bg: (1, 1, 0)
+[Model48pxOCR] prob: 0.8644514083862305 부교수가된다. fg: (4, 2, 0) bg: (4, 2, 0)
+[Model48pxOCR] prob: 0.7792608141899109 온전한건아니대 fg: (2, 2, 0) bg: (2, 2, 0)
+[Model48pxOCR] prob: 0.9926051497459412 시간이주어지지만, fg: (2, 1, 0) bg: (2, 1, 0)
+[Model48pxOCR] prob: 0.9990368485450745 본인이원하는분야의 fg: (2, 4, 2) bg: (2, 4, 2)
+[Model48pxOCR] prob: 0.8113138675689697 뒤치다거리해가며 fg: (1, 2, 1) bg: (1, 2, 1)
+[Model48pxOCR] prob: 0.9529723525047302 조교수에서윗사람들 fg: (2, 1, 0) bg: (2, 1, 0)
+[Model48pxOCR] prob: 0.4478428363800049 몇년을버티고또버텨이 fg: (4, 2, 1) bg: (4, 2, 1)
+[Model48pxOCR] prob: 0.7948591113090515 진료와연구를할수있는 fg: (2, 1, 0) bg: (2, 1, 0)
+[local] No pre-translation replacements made.
+[local] Running text translation
+[M2M100Translator] Translating into English
+[M2M100Translator] 0: 조교수에서윗사람들 뒤치다거리해가며 몇년을버티고또버텨이 부교수가된다. => From the assistant professor upper people go behind, and for several years he remains a deputy teacher.
+[M2M100Translator] 1: 부교수가되면 본인이원하는분야의 진료와연구를할수있는 시간이주어지지만, => If you become a deputy professor, it will be given time to carry out clinical and research in the field he wants.
+[M2M100Translator] 2: 그마저도 온전한건아니대 => You are not even complete.
+[local] No post-translation replacements made.
+[local] Starting post-translation check...
+[local] Skipping page-level target language check: only 3 regions (threshold: 5)
+[local] All translation regions passed post-translation check.
+[local] Running mask refinement
+[mask]: 100%|████████████████████████████████| 10/10 [00:00<00:00, 249.05it/s]
+[LamaLargeInpainter] Inpainting resolution: 448x1024
+[local] Running rendering
+[render]: 100%|█████████████████████████████████| 3/3 [00:00<00:00,  7.60it/s]
+[local] Saving "/Users/muhammadfaiz/Custom APP/manga_translate/samples_out/018.jpg"
+[local] Translating: "/Users/muhammadfaiz/Custom APP/manga_translate/samples_in/019.jpg"
+[local] Loading models
+[local] Running text detection
+[local] Running ocr
+[Model48pxOCR] prob: 0.9996723532676697 슈퍼스타로 fg: (5, 5, 2) bg: (5, 5, 2)
+[Model48pxOCR] prob: 0.9552459716796875 수혁이개 fg: (3, 3, 1) bg: (3, 3, 1)
+[Model48pxOCR] prob: 0.738051176071167 원하는일을 fg: (5, 6, 4) bg: (4, 5, 4)
+[Model48pxOCR] prob: 0.9989395141601562 하지만이렇게 fg: (2, 3, 1) bg: (2, 3, 1)
+[Model48pxOCR] prob: 0.9215760231018066 할수있을거야. fg: (4, 2, 0) bg: (4, 2, 0)
+[Model48pxOCR] prob: 0.8260394334793091 만들어버리면…! fg: (3, 5, 1) bg: (3, 5, 1)
+[Model48pxOCR] prob: 0.9965125918388367 주변에휘둘리지않고 fg: (1, 1, 0) bg: (1, 1, 0)
+[local] No pre-translation replacements made.
+[local] Running text translation
+[M2M100Translator] Translating into English
+[M2M100Translator] 0: 하지만이렇게 슈퍼스타로 만들어버리면…! => But if you’re making it a superstar...
+[M2M100Translator] 1: 수혁이개 주변에휘둘리지않고 원하는일을 할수있을거야. => You will be able to do what you want without moving around the reforms.
+[local] No post-translation replacements made.
+[local] Starting post-translation check...
+[local] Skipping page-level target language check: only 2 regions (threshold: 5)
+[local] All translation regions passed post-translation check.
+[local] Running mask refinement
+[mask]: 100%|██████████████████████████████████| 7/7 [00:00<00:00, 278.64it/s]
+[LamaLargeInpainter] Inpainting resolution: 448x1024
+[local] Running rendering
+[render]: 100%|█████████████████████████████████| 2/2 [00:00<00:00,  7.56it/s]
+[local] Saving "/Users/muhammadfaiz/Custom APP/manga_translate/samples_out/019.jpg"
+[local] Translating: "/Users/muhammadfaiz/Custom APP/manga_translate/samples_in/020.jpg"
+[local] Loading models
+[local] Running text detection
+[local] Running ocr
+[Model48pxOCR] prob: 0.9997391104698181 세계적으로 fg: (3, 2, 1) bg: (3, 2, 1)
+[Model48pxOCR] prob: 0.994585394859314 단순한교수로 fg: (3, 4, 2) bg: (3, 4, 2)
+[Model48pxOCR] prob: 0.9977428913116455 이현종은수혁을 fg: (6, 7, 5) bg: (6, 7, 5)
+[Model48pxOCR] prob: 0.9880204200744629 유명한의사야있지 fg: (3, 5, 2) bg: (3, 5, 2)
+[Model48pxOCR] prob: 0.6718894243240356 만들생각이없군요 fg: (3, 1, 1) bg: (3, 1, 1)
+[local] No pre-translation replacements made.
+[local] Running text translation
+[M2M100Translator] Translating into English
+[M2M100Translator] 0: 이현종은수혁을 단순한교수로 만들생각이없군요 => There is no idea of making the reform a simple teacher.
+[M2M100Translator] 1: 세계적으로 유명한의사야있지 => There is a world-famous physician.
+[local] No post-translation replacements made.
+[local] Starting post-translation check...
+[local] Skipping page-level target language check: only 2 regions (threshold: 5)
+[local] All translation regions passed post-translation check.
+[local] Running mask refinement
+[mask]: 100%|██████████████████████████████████| 5/5 [00:00<00:00, 271.37it/s]
+[LamaLargeInpainter] Inpainting resolution: 448x1024
+[local] Running rendering
+[render]: 100%|█████████████████████████████████| 2/2 [00:00<00:00,  8.81it/s]
+[local] Saving "/Users/muhammadfaiz/Custom APP/manga_translate/samples_out/020.jpg"
+[local] Translating: "/Users/muhammadfaiz/Custom APP/manga_translate/samples_in/021.jpg"
+[local] Loading models
+[local] Running text detection
+[local] Running ocr
+[Model48pxOCR] prob: 0.7444614768028259 근데그중 fg: (2, 1, 2) bg: (2, 1, 2)
+[Model48pxOCR] prob: 0.48546934127807617 사람이어딨어? fg: (4, 4, 3) bg: (4, 4, 3)
+[Model48pxOCR] prob: 0.9980241656303406 프로그램을도입한 fg: (1, 3, 2) bg: (1, 3, 2)
+[Model48pxOCR] prob: 0.9134521484375 네가처음이야. fg: (2, 3, 1) bg: (3, 5, 1)
+[Model48pxOCR] prob: 0.6649805307388306 세계적으로쓰이는 fg: (1, 1, 1) bg: (1, 1, 1)
+[local] No pre-translation replacements made.
+[local] Running text translation
+[M2M100Translator] Translating into English
+[M2M100Translator] 0: 근데그중 세계적으로쓰이는 프로그램을도입한 사람이어딨어? => Who is the one who has entered a worldwide program, don't you know?
+[M2M100Translator] 1: 네가처음이야. => It is your first time.
+[local] No post-translation replacements made.
+[local] Starting post-translation check...
+[local] Skipping page-level target language check: only 2 regions (threshold: 5)
+[local] All translation regions passed post-translation check.
+[local] Running mask refinement
+[mask]: 100%|██████████████████████████████████| 5/5 [00:00<00:00, 283.94it/s]
+[LamaLargeInpainter] Inpainting resolution: 448x1024
+[local] Running rendering
+[render]: 100%|█████████████████████████████████| 2/2 [00:00<00:00,  8.57it/s]
+[local] Saving "/Users/muhammadfaiz/Custom APP/manga_translate/samples_out/021.jpg"
+[local] Translating: "/Users/muhammadfaiz/Custom APP/manga_translate/samples_in/022.jpg"
+[local] Loading models
+[local] Running text detection
+[local] Running ocr
+[Model48pxOCR] prob: 0.8258352875709534 그프로그램의 fg: (2, 1, 0) bg: (2, 1, 0)
+[Model48pxOCR] prob: 0.9983309507369995 주인공이되는거야 fg: (2, 2, 0) bg: (2, 2, 0)
+[Model48pxOCR] prob: 0.9830870032310486 네가뉴스에나가면 fg: (2, 0, 0) bg: (2, 0, 0)
+[local] No pre-translation replacements made.
+[local] Running text translation
+[M2M100Translator] Translating into English
+[M2M100Translator] 0: 네가뉴스에나가면 그프로그램의 주인공이되는거야 => If you go to NegaNews, it will become the protagonist of this program.
+[local] No post-translation replacements made.
+[local] Starting post-translation check...
+[local] Skipping page-level target language check: only 1 regions (threshold: 5)
+[local] All translation regions passed post-translation check.
+[local] Running mask refinement
+[mask]: 100%|██████████████████████████████████| 3/3 [00:00<00:00, 315.55it/s]
+[LamaLargeInpainter] Inpainting resolution: 448x1024
+[local] Running rendering
+[render]: 100%|█████████████████████████████████| 1/1 [00:00<00:00,  7.96it/s]
+[local] Saving "/Users/muhammadfaiz/Custom APP/manga_translate/samples_out/022.jpg"
+[local] Translating: "/Users/muhammadfaiz/Custom APP/manga_translate/samples_in/023.jpg"
+[local] Loading models
+[local] Running text detection
+[local] Running ocr
+[Model48pxOCR] prob: 0.9990670084953308 수혁을정말 fg: (4, 6, 2) bg: (4, 6, 2)
+[Model48pxOCR] prob: 0.9857963919639587 역시이현종은. fg: (5, 4, 2) bg: (5, 4, 2)
+[Model48pxOCR] prob: 0.9975402355194092 아들로생각합니다 fg: (1, 1, 0) bg: (1, 1, 0)
+[local] No pre-translation replacements made.
+[local] Running text translation
+[M2M100Translator] Translating into English
+[M2M100Translator] 0: 역시이현종은. => This is the species.
+[M2M100Translator] 1: 수혁을정말 아들로생각합니다 => I really think of the reform as a son.
+[local] No post-translation replacements made.
+[local] Starting post-translation check...
+[local] Skipping page-level target language check: only 2 regions (threshold: 5)
+[local] All translation regions passed post-translation check.
+[local] Running mask refinement
+[mask]: 100%|██████████████████████████████████| 3/3 [00:00<00:00, 263.99it/s]
+[LamaLargeInpainter] Inpainting resolution: 448x1024
+[local] Running rendering
+[render]: 100%|█████████████████████████████████| 2/2 [00:00<00:00,  8.73it/s]
+[local] Saving "/Users/muhammadfaiz/Custom APP/manga_translate/samples_out/023.jpg"
+[local] Translating: "/Users/muhammadfaiz/Custom APP/manga_translate/samples_in/024.jpg"
+[local] Loading models
+[local] Running text detection
+[local] Running ocr
+[Model48pxOCR] prob: 0.9990341663360596 법적으로 fg: (8, 7, 5) bg: (8, 7, 5)
+[Model48pxOCR] prob: 0.9937677979469299 토달지마! fg: (137, 136, 135) bg: (137, 136, 135)
+[Model48pxOCR] prob: 0.49071362614631653 아무사이되 fg: (3, 2, 0) bg: (3, 2, 0)
+[Model48pxOCR] prob: 0.9969949722290039 아닌데다가, fg: (2, 2, 0) bg: (2, 2, 0)
+[Model48pxOCR] prob: 0.9679273962974548 수혁이잖아? fg: (109, 113, 113) bg: (109, 113, 113)
+[Model48pxOCR] prob: 0.9666042327880859 교수만들거야. fg: (135, 134, 135) bg: (135, 134, 135)
+[Model48pxOCR] prob: 0.7526209950447083 이게누구야 fg: (116, 116, 114) bg: (116, 116, 114)
+[Model48pxOCR] prob: 0.6690590381622314 진짜아들로…? fg: (2, 1, 2) bg: (2, 1, 2)
+[Model48pxOCR] prob: 0.33774012327194214 내아들,내손으로 fg: (125, 128, 128) bg: (125, 128, 128)
+[local] No pre-translation replacements made.
+[local] Running text translation
+[M2M100Translator] Translating into English
+[M2M100Translator] 0: 진짜아들로…? => The real sons...
+[M2M100Translator] 1: 법적으로 아무사이되 아닌데다가, => If it is not legal,
+[M2M100Translator] 2: 이게누구야 수혁이잖아? => Who is the reform, right?
+[M2M100Translator] 3: 내아들,내손으로 교수만들거야. 토달지마! => My son, I will be teachers with my hands.
+[local] No post-translation replacements made.
+[local] Starting post-translation check...
+[local] Skipping page-level target language check: only 4 regions (threshold: 5)
+[local] All translation regions passed post-translation check.
+[local] Running mask refinement
+[mask]: 100%|██████████████████████████████████| 9/9 [00:00<00:00, 401.21it/s]
+[LamaLargeInpainter] Inpainting resolution: 448x1024
+[local] Running rendering
+[render]: 100%|█████████████████████████████████| 4/4 [00:00<00:00,  9.56it/s]
+[local] Saving "/Users/muhammadfaiz/Custom APP/manga_translate/samples_out/024.jpg"
+[local] Translating: "/Users/muhammadfaiz/Custom APP/manga_translate/samples_in/025.jpg"
+[local] Loading models
+[local] Running text detection
+[local] Running ocr
+[Model48pxOCR] prob: 0.9958851337432861 어,아들! fg: (134, 134, 136) bg: (134, 134, 136)
+[Model48pxOCR] prob: 0.9924734234809875 그랬다면 fg: (2, 2, 1) bg: (2, 2, 1)
+[Model48pxOCR] prob: 0.964012622833252 들어와,들어와 fg: (123, 128, 125) bg: (123, 128, 125)
+[Model48pxOCR] prob: 0.9977235794067383 애초에나한테 fg: (2, 2, 1) bg: (2, 2, 1)
+[Model48pxOCR] prob: 0.5672944188117981 그리고수혁이7 fg: (122, 124, 123) bg: (122, 124, 123)
+[Model48pxOCR] prob: 0.712113082408905 시작되지도않았을 fg: (3, 3, 1) bg: (3, 3, 1)
+[Model48pxOCR] prob: 0.9604488015174866 안아줄사람이야? fg: (114, 116, 118) bg: (114, 116, 118)
+[Model48pxOCR] prob: 0.9976181983947754 날탐내지않았다면 fg: (5, 4, 2) bg: (5, 4, 2)
+[Model48pxOCR] prob: 0.9952901601791382 꼭이쁜짓을해야만 fg: (112, 115, 115) bg: (112, 115, 115)
+[Model48pxOCR] prob: 0.9984920620918274 바루다가없었다면 fg: (3, 3, 0) bg: (3, 3, 0)
+[Model48pxOCR] prob: 0.42411720752716064 F나른병원에서 fg: (0, 0, 0) bg: (0, 0, 0)
+[local] No pre-translation replacements made.
+[local] Running text translation
+[M2M100Translator] Translating into English
+[M2M100Translator] 0: F나른병원에서 날탐내지않았다면 => If you haven’t been visited at the Farnese Hospital,
+[M2M100Translator] 1: 그리고수혁이7 꼭이쁜짓을해야만 안아줄사람이야? => Do you have to do a good thing for the 7th Reform?
+[M2M100Translator] 2: 애초에나한테 바루다가없었다면 => If you didn’t want me at first, then
+[M2M100Translator] 3: 어,아들! 들어와,들어와 => Oh my son, come in and go inside.
+[M2M100Translator] 4: 그랬다면 시작되지도않았을 => If so, it would not have started.
+[local] No post-translation replacements made.
+[local] Starting post-translation check...
+[local] Skipping page-level target language check: only 5 regions (threshold: 5)
+[local] All translation regions passed post-translation check.
+[local] Running mask refinement
+[mask]: 100%|████████████████████████████████| 11/11 [00:00<00:00, 361.92it/s]
+[LamaLargeInpainter] Inpainting resolution: 448x1024
+[local] Running rendering
+[render]: 100%|█████████████████████████████████| 5/5 [00:00<00:00,  8.70it/s]
+[local] Saving "/Users/muhammadfaiz/Custom APP/manga_translate/samples_out/025.jpg"
+[local] Translating: "/Users/muhammadfaiz/Custom APP/manga_translate/samples_in/026.jpg"
+[local] Loading models
+[local] Running text detection
+[local] Running ocr
+[Model48pxOCR] prob: 0.9300625324249268 뭐… fg: (4, 5, 4) bg: (4, 5, 4)
+[Model48pxOCR] prob: 0.9300135374069214 그렇긴합니다만 fg: (0, 2, 0) bg: (0, 2, 0)
+[local] No pre-translation replacements made.
+[local] Running text translation
+[M2M100Translator] Translating into English
+[M2M100Translator] 0: 뭐… 그렇긴합니다만 => What... that’s, but
+[local] No post-translation replacements made.
+[local] Starting post-translation check...
+[local] Skipping page-level target language check: only 1 regions (threshold: 5)
+[local] All translation regions passed post-translation check.
+[local] Running mask refinement
+[mask]: 100%|██████████████████████████████████| 2/2 [00:00<00:00, 433.36it/s]
+[LamaLargeInpainter] Inpainting resolution: 448x1024
+[local] Running rendering
+[render]: 100%|█████████████████████████████████| 1/1 [00:00<00:00,  9.46it/s]
+[local] Saving "/Users/muhammadfaiz/Custom APP/manga_translate/samples_out/026.jpg"
+[local] Translating: "/Users/muhammadfaiz/Custom APP/manga_translate/samples_in/027.jpg"
+[local] Loading models
+[local] Running text detection
+[local] Running ocr
+[Model48pxOCR] prob: 0.9944906234741211 그렇다고지금 fg: (3, 4, 0) bg: (3, 4, 0)
+[Model48pxOCR] prob: 0.9945066571235657 가짜인건아니잖아요 fg: (1, 1, 0) bg: (1, 1, 0)
+[Model48pxOCR] prob: 0.9974570870399475 수혁에게주고있는애정이 fg: (1, 1, 0) bg: (1, 1, 0)
+[local] No pre-translation replacements made.
+[local] Running text translation
+[M2M100Translator] Translating into English
+[M2M100Translator] 0: 그렇다고지금 수혁에게주고있는애정이 가짜인건아니잖아요 => The love that you are giving to the reform is not false.
+[local] No post-translation replacements made.
+[local] Starting post-translation check...
+[local] Skipping page-level target language check: only 1 regions (threshold: 5)
+[local] All translation regions passed post-translation check.
+[local] Running mask refinement
+[mask]: 100%|██████████████████████████████████| 3/3 [00:00<00:00, 205.20it/s]
+[LamaLargeInpainter] Inpainting resolution: 448x1024
+^Z
+zsh: suspended  bash scripts/mit_run.sh --use-gpu-limited
+(.venv) muhammadfaiz@Muhammads-MacBook-Air manga_translate % 
