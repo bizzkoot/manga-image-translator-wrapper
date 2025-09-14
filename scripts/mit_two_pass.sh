@@ -103,6 +103,23 @@ if [[ -n "${LIMIT_IMAGES}" ]]; then
   fi
 fi
 
+## Always filter the run input to images only
+## - Excludes macOS .DS_Store and any non-image files (e.g., *_translations.txt)
+FILTERED_DIR=".cache/filtered/${CHAPTER}"
+rm -rf "$FILTERED_DIR" 2>/dev/null || true
+mkdir -p "$FILTERED_DIR"
+mapfile -t IMG_SRC < <(find "$RUN_INPUT_DIR" -type f \
+  \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.webp' -o -iname '*.bmp' -o -iname '*.gif' \) \
+  ! -name '.DS_Store' 2>/dev/null | sort)
+if (( ${#IMG_SRC[@]} == 0 )); then
+  echo "[warn] No image files found after filtering in $RUN_INPUT_DIR" >&2
+else
+  for f in "${IMG_SRC[@]}"; do
+    cp "$f" "$FILTERED_DIR/" 2>/dev/null || true
+  done
+  RUN_INPUT_DIR="$FILTERED_DIR"
+fi
+
 echo "[1/3] Extract pass (translator none, original inpaint)"
 if [[ "$RENDER_ONLY" != true ]]; then
   # Write extract images to a per-chapter folder for tidier debugging
@@ -241,6 +258,18 @@ if [[ "$EXTRACT_ONLY" == true ]]; then
 fi
 
 echo "[3/3] Translate + render with dictionaries"
+# Build a fresh images-only render set to avoid any *_translations.txt created during extract
+RENDER_INPUT_DIR=".cache/filtered_render/${CHAPTER}"
+rm -rf "$RENDER_INPUT_DIR" 2>/dev/null || true
+mkdir -p "$RENDER_INPUT_DIR"
+mapfile -t IMG_RENDER_SRC < <(find "$INPUT_DIR" -type f \
+  \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.webp' -o -iname '*.bmp' -o -iname '*.gif' \) \
+  ! -name '.DS_Store' 2>/dev/null | sort)
+if (( ${#IMG_RENDER_SRC[@]} > 0 )); then
+  for f in "${IMG_RENDER_SRC[@]}"; do
+    cp "$f" "$RENDER_INPUT_DIR/" 2>/dev/null || true
+  done
+fi
 RENDER_FLAGS=("--overwrite" "--skip-no-text")
 [[ -f "$DICT_DIR/pre_dict.txt" ]] && RENDER_FLAGS+=("--pre-dict" "$DICT_DIR/pre_dict.txt")
 [[ -f "$DICT_DIR/post_dict.txt" ]] && RENDER_FLAGS+=("--post-dict" "$DICT_DIR/post_dict.txt")
@@ -249,18 +278,35 @@ RENDER_FLAGS=("--overwrite" "--skip-no-text")
 FINAL_OUTPUT_DIR="${OUTPUT_DIR%/}/$CHAPTER"
 
 CONFIG_PATH="$here/mit_config.json" \
-CLI_INPUT_DIR="$RUN_INPUT_DIR" \
+CLI_INPUT_DIR="${RENDER_INPUT_DIR:-$RUN_INPUT_DIR}" \
 OUTPUT_DIR="$FINAL_OUTPUT_DIR" \
+# Prefer external translations without creating -orig copies in final output
+# We rely on engine's external-trans-dir early return to skip local MT.
 EXTRA_FLAGS="${RENDER_FLAGS[*]} ${EXTERNAL_TRANS_DIR:+--external-trans-dir $EXTERNAL_TRANS_DIR}" \
 bash "$here/mit_run.sh" --use-gpu-limited -v
 
 # Cleanup temporary extract outputs only when a full 3-step run occurred
 if [[ "$RENDER_ONLY" != true && "$EXTRACT_ONLY" != true ]]; then
-  EXTRACT_OUTPUT_BASE="${EXTRACT_OUTPUT_DIR:-./samples_out_extract}"
-  EXTRACT_OUTPUT_DIR="$EXTRACT_OUTPUT_BASE/$CHAPTER"
-  if [[ -d "$EXTRACT_OUTPUT_DIR" ]]; then
-    echo "[cleanup] Removing temporary extract images at $EXTRACT_OUTPUT_DIR"
-    rm -rf "$EXTRACT_OUTPUT_DIR"
+  # Use the actual extract output dir if set earlier; otherwise fall back to default
+  CLEAN_EXTRACT_DIR="${EXTRACT_OUTPUT_DIR:-}"  # value used during step [1/3]
+  if [[ -z "$CLEAN_EXTRACT_DIR" ]]; then
+    CLEAN_EXTRACT_DIR="./samples_out_extract/$CHAPTER"
+  fi
+  if [[ -d "$CLEAN_EXTRACT_DIR" ]]; then
+    echo "[cleanup] Removing temporary extract images at $CLEAN_EXTRACT_DIR"
+    rm -rf "$CLEAN_EXTRACT_DIR"
+  fi
+fi
+
+# Optionally clean filtered caches to keep workspace tidy
+if [[ "$RENDER_ONLY" != true && "$EXTRACT_ONLY" != true ]]; then
+  if [[ -d "$FILTERED_DIR" ]]; then
+    echo "[cleanup] Removing filtered cache at $FILTERED_DIR"
+    rm -rf "$FILTERED_DIR"
+  fi
+  if [[ -d "$RENDER_INPUT_DIR" ]]; then
+    echo "[cleanup] Removing filtered render cache at $RENDER_INPUT_DIR"
+    rm -rf "$RENDER_INPUT_DIR"
   fi
 fi
 
@@ -268,6 +314,8 @@ fi
 if [[ -d "$FINAL_OUTPUT_DIR" ]]; then
   echo "[cleanup] Removing text dumps from $FINAL_OUTPUT_DIR (*_translations.txt, *_translation.txt, *.translation.txt)"
   find "$FINAL_OUTPUT_DIR" -type f \( -name "*_translations.txt" -o -name "*_translation.txt" -o -name "*.translation.txt" \) -delete 2>/dev/null || true
+  echo "[cleanup] Removing original image copies from $FINAL_OUTPUT_DIR (*-orig.*)"
+  find "$FINAL_OUTPUT_DIR" -type f \( -name "*-orig.jpg" -o -name "*-orig.jpeg" -o -name "*-orig.png" -o -name "*-orig.webp" -o -name "*-orig.bmp" -o -name "*-orig.gif" -o -name "*-orig.*" \) -delete 2>/dev/null || true
 fi
 
 echo "[done] Results in $FINAL_OUTPUT_DIR. Aggregates in $AGG_DIR. Dictionaries in $DICT_DIR."
