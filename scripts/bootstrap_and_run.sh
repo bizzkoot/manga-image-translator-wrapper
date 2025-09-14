@@ -193,28 +193,28 @@ insert_after_line(
     presence_hint='external_trans_dir',
 )
 
-# 4) manga_translator.py: external translations fast-path within none-translator block
+# 4) manga_translator.py: external translations fast-path before any translator
 block4 = (
-    "            # External per-image translations: if provided, load and apply, skipping MT\n"
-    "            if getattr(self, 'external_trans_dir', None):\n"
-    "                try:\n"
-    "                    if self.current_input_basename:\n"
-    "                        p = os.path.join(self.external_trans_dir, f\"{self.current_input_basename}_translations.json\")\n"
-    "                        if os.path.exists(p):\n"
-    "                            with open(p, 'r', encoding='utf-8') as f:\n"
-    "                                translated_sentences = json.load(f)\n"
-    "                            for region, translation in zip(ctx.text_regions, translated_sentences):\n"
-    "                                region.translation = translation\n"
-    "                                region.target_lang = config.translator.target_lang\n"
-    "                                region._alignment = config.render.alignment\n"
-    "                                region._direction = config.render.direction\n"
-    "                            return ctx.text_regions\n"
-    "                except Exception as e:\n"
-    "                    logger.warning(f\"Failed to load external translations: {e}\")\n"
+    "        # First: if external per-image translations are provided, prefer them and skip MT\n"
+    "        if getattr(self, 'external_trans_dir', None):\n"
+    "            try:\n"
+    "                if self.current_input_basename:\n"
+    "                    p = os.path.join(self.external_trans_dir, f\"{self.current_input_basename}_translations.json\")\n"
+    "                    if os.path.exists(p):\n"
+    "                        with open(p, 'r', encoding='utf-8') as f:\n"
+    "                            translated_sentences = json.load(f)\n"
+    "                        for region, translation in zip(ctx.text_regions, translated_sentences):\n"
+    "                            region.translation = translation\n"
+    "                            region.target_lang = config.translator.target_lang\n"
+    "                            region._alignment = config.render.alignment\n"
+    "                            region._direction = config.render.direction\n"
+    "                        return ctx.text_regions\n"
+    "            except Exception as e:\n"
+    "                logger.warning(f\"Failed to load external translations: {e}\")\n"
 )
 insert_after_line(
     core_py,
-    "if config.translator.translator == Translator.none:",
+    "if not ctx.text_regions:",
     block4,
     presence_hint='external translations: if provided',
 )
