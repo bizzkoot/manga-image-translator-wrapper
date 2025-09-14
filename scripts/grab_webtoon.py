@@ -250,12 +250,24 @@ def parse_chapter_label(url: str, html: str | None = None) -> tuple[str, dict]:
             m2 = re.search(r"<title>([^<]+)</title>", html, re.I)
             if m2:
                 ep_title = m2.group(1)
+        # If toolbar subtitle didn't yield a number, try to parse from og:title/title
+        if not ep_no_text and ep_title:
+            # Common patterns: "... - 131화 : ...", "... 第12話 ...", "Episode 23"
+            for pat in (
+                r"(\d{1,5})\s*화",           # Korean: 131화
+                r"第\s*(\d{1,5})\s*[話回]",  # JP variants
+                r"Episode\s*(\d{1,5})",      # EN fallback
+            ):
+                mnum2 = re.search(pat, ep_title, re.I)
+                if mnum2:
+                    ep_no_text = mnum2.group(1)
+                    break
     # Build a clean slug from main title (avoid subtitle noise like trailing -2)
     slug_base = ep_main or ep_title
     slug = slugify(slug_base) if slug_base else None
     if slug and re.search(r"-\d+$", slug):  # drop trailing dash+digits
         slug = re.sub(r"-\d+$", "", slug)
-    # Prefer the number extracted from subtitle (page's own display); fallback to query param
+    # Prefer the number extracted from page content; fallback to query param
     chapter_no = (ep_no_text or '') or no
     label = f"{site}_{title_id}_{chapter_no}" if (title_id or chapter_no) else (slug or "episode")
     if slug:

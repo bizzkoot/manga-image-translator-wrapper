@@ -111,7 +111,7 @@ if [[ "$RENDER_ONLY" != true ]]; then
   CONFIG_PATH="$here/mit_config_extract.json" \
   CLI_INPUT_DIR="$RUN_INPUT_DIR" \
   OUTPUT_DIR="$EXTRACT_OUTPUT_DIR" \
-  EXTRA_FLAGS="--prep-manual --save-text --skip-no-text --overwrite --batch-size 8" \
+  EXTRA_FLAGS="--prep-manual --save-text --skip-no-text --overwrite" \
   bash "$here/mit_run.sh" --use-gpu-limited -v
 else
   echo "  Skipped (render-only)"
@@ -122,8 +122,14 @@ echo "[2/3] Aggregate text dumps"
 # Primary search: next to inputs; Fallback: some MIT builds save next to extract outputs
 EXTRACT_FALLBACK_DIR="./samples_out_extract/$CHAPTER"
 mapfile -t TEXT_FILES < <({
+  # Common upstream naming
   find "$RUN_INPUT_DIR" -type f -name "*_translations.txt" 2>/dev/null
   find "$EXTRACT_FALLBACK_DIR" -type f -name "*_translations.txt" 2>/dev/null
+  # Some builds/scripts use singular or dotted variant
+  find "$RUN_INPUT_DIR" -type f -name "*_translation.txt" 2>/dev/null
+  find "$EXTRACT_FALLBACK_DIR" -type f -name "*_translation.txt" 2>/dev/null
+  find "$RUN_INPUT_DIR" -type f -name "*.translation.txt" 2>/dev/null
+  find "$EXTRACT_FALLBACK_DIR" -type f -name "*.translation.txt" 2>/dev/null
 } | sort -u)
   if (( ${#TEXT_FILES[@]} == 0 )); then
     echo "  No text dumps found under $RUN_INPUT_DIR or $EXTRACT_FALLBACK_DIR." >&2
@@ -260,8 +266,8 @@ fi
 
 # Always keep final output folder clean (images only)
 if [[ -d "$FINAL_OUTPUT_DIR" ]]; then
-  echo "[cleanup] Removing text dumps from $FINAL_OUTPUT_DIR (*_translations.txt)"
-  find "$FINAL_OUTPUT_DIR" -type f -name "*_translations.txt" -delete 2>/dev/null || true
+  echo "[cleanup] Removing text dumps from $FINAL_OUTPUT_DIR (*_translations.txt, *_translation.txt, *.translation.txt)"
+  find "$FINAL_OUTPUT_DIR" -type f \( -name "*_translations.txt" -o -name "*_translation.txt" -o -name "*.translation.txt" \) -delete 2>/dev/null || true
 fi
 
 echo "[done] Results in $FINAL_OUTPUT_DIR. Aggregates in $AGG_DIR. Dictionaries in $DICT_DIR."
