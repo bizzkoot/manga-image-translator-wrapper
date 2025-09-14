@@ -25,16 +25,17 @@ This repository provides a macOS‑optimized wrapper over the upstream “manga-
 - Python 3.11 (recommended): `brew install python@3.11`
 - Optional Homebrew deps: `brew install cmake pkg-config`
 
-Check MPS (Apple GPU) availability:
+Check MPS (Apple GPU) availability (after bootstrap installs PyTorch):
 
 ```
 . .venv/bin/activate 2>/dev/null || true
-python - <<'PY'
-import torch; print(torch.__version__, torch.backends.mps.is_available())
-PY
+python3 -c "import torch; print(torch.__version__, torch.backends.mps.is_available())"
 ```
 
-Expect something like: `2.8.0 True`.
+Notes:
+- Run this after `bash scripts/bootstrap_and_run.sh` so PyTorch is installed.
+- If your system uses `python` instead of `python3`, use that binary accordingly.
+- Expect something like: `2.8.0 True`.
 
 ## 1) Bootstrap (one‑time)
 

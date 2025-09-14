@@ -111,7 +111,7 @@ if [[ "$RENDER_ONLY" != true ]]; then
   CONFIG_PATH="$here/mit_config_extract.json" \
   CLI_INPUT_DIR="$RUN_INPUT_DIR" \
   OUTPUT_DIR="$EXTRACT_OUTPUT_DIR" \
-  EXTRA_FLAGS="--prep-manual --skip-no-text --overwrite" \
+  EXTRA_FLAGS="--prep-manual --save-text --skip-no-text --overwrite --batch-size 8" \
   bash "$here/mit_run.sh" --use-gpu-limited -v
 else
   echo "  Skipped (render-only)"
@@ -119,9 +119,20 @@ fi
 
 echo "[2/3] Aggregate text dumps"
 # Collect per-image dumps from the processed set: <image>_translations.txt
-mapfile -t TEXT_FILES < <(find "$RUN_INPUT_DIR" -type f -name "*_translations.txt" | sort)
+# Primary search: next to inputs; Fallback: some MIT builds save next to extract outputs
+EXTRACT_FALLBACK_DIR="./samples_out_extract/$CHAPTER"
+mapfile -t TEXT_FILES < <({
+  find "$RUN_INPUT_DIR" -type f -name "*_translations.txt" 2>/dev/null
+  find "$EXTRACT_FALLBACK_DIR" -type f -name "*_translations.txt" 2>/dev/null
+} | sort -u)
   if (( ${#TEXT_FILES[@]} == 0 )); then
-    echo "  No text dumps found under $RUN_INPUT_DIR. Ensure extract pass completed and images had detectable text." >&2
+    echo "  No text dumps found under $RUN_INPUT_DIR or $EXTRACT_FALLBACK_DIR." >&2
+    echo "  Proceeding without aggregation; dictionaries can still be edited manually." >&2
+    mkdir -p "$AGG_DIR"
+    : > "$AGG_DIR/unique_lines.txt"
+    echo "[]" > "$AGG_DIR/raw_records.json"
+    printf "# Pre-translation dictionary\n# Format: <regex> <replacement>\n\n" > "$AGG_DIR/template_pre_dict.txt"
+    printf "# Post-translation dictionary\n# Format: <regex> <replacement>\n\n" > "$AGG_DIR/template_post_dict.txt"
   else
     python "$here/text_aggregate.py" --in "${TEXT_FILES[@]}" --out-dir "$AGG_DIR"
   fi
@@ -131,6 +142,10 @@ UNIQUE_SRC="$AGG_DIR/unique_lines.txt"
 UNIQUE_DST="$AGG_DIR/unique_lines_EN.txt"
 QWEN_INPUT="$AGG_DIR/qwen_input.txt"
 if [[ -f "$UNIQUE_SRC" ]]; then
+  # If there are no unique lines, skip external LLM flow entirely
+  if [[ ! -s "$UNIQUE_SRC" ]]; then
+    echo "[info] No unique lines found; skipping external LLM step."
+  else
   echo "[info] Building Qwen input at $QWEN_INPUT"
   {
     echo "You are a professional comic translator. Translate the following source lines (one per line) to natural, coherent English as if part of the same episode."
@@ -208,6 +223,7 @@ if [[ -f "$UNIQUE_SRC" ]]; then
     python "$here/llm_translate_mapping.py" --chapter "$CHAPTER"
     EXTERNAL_TRANS_DIR="$AGG_DIR/llm"
   fi
+  fi # end non-empty UNIQUE_SRC guard
 fi
 # Seed dicts on first run, do not overwrite if already present
 [[ -f "$DICT_DIR/pre_dict.txt" ]] || cp "$AGG_DIR/template_pre_dict.txt" "$DICT_DIR/pre_dict.txt"

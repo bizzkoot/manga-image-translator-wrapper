@@ -61,6 +61,44 @@ if [[ ! -d "$MIT_DIR" ]]; then
   git clone https://github.com/zyddnys/manga-image-translator.git "$MIT_DIR"
 fi
 
+# Optionally pin upstream to a specific commit/tag for stability
+if [[ -n "${MIT_COMMIT:-}" ]]; then
+  echo "[3b/7] Pinning manga-image-translator to ${MIT_COMMIT}"
+  git -C "$MIT_DIR" fetch --all --tags || true
+  git -C "$MIT_DIR" checkout --quiet "$MIT_COMMIT" || {
+    echo "[warn] Failed to checkout ${MIT_COMMIT}. Continuing on current HEAD." >&2
+  }
+fi
+
+# Optionally apply small, non-invasive patches for stable extract dumps
+if [[ "${APPLY_MIT_PATCH:-1}" == "1" ]]; then
+  echo "[3c/7] Patching upstream for reliable per-image text dumps"
+  PYFILE="$MIT_DIR/manga_translator/mode/local.py"
+  if [[ -f "$PYFILE" ]]; then
+    python - "$PYFILE" <<'PY'
+import io, os, sys, re
+p = sys.argv[1]
+src = io.open(p, 'r', encoding='utf-8').read()
+orig = src
+# 1) Honor --save-text-file by reading save_text_file instead of text_output_file
+src = src.replace('text_output_file = self.text_output_file', 'text_output_file = self.save_text_file or ""')
+# 2) Use ctx.text_regions gate instead of self.text_regions if present
+src = src.replace('if self.text_regions:', 'if ctx.text_regions:')
+if src != orig:
+    bak = p + '.bak'
+    with io.open(bak, 'w', encoding='utf-8') as f:
+        f.write(orig)
+    with io.open(p, 'w', encoding='utf-8') as f:
+        f.write(src)
+    print('[patch] Updated', p)
+else:
+    print('[patch] No changes needed for', p)
+PY
+  else
+    echo "[patch] Skipped: $PYFILE not found"
+  fi
+fi
+
 echo "[4/7] Install project dependencies"
 pip install -r "$MIT_DIR/requirements.txt"
 
