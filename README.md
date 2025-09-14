@@ -1,7 +1,8 @@
-# Manga Translate (macOS, Apple Silicon) 🖼️➡️🗣️
+# Manga Translate for macOS (Apple Silicon)
 
-This repository glues together a **fast, local, no‑API manga pipeline** on macOS (M1/M2/M3).  
-It wraps the upstream [manga-image-translator](https://github.com/zyddnys/manga-image-translator) with Mac‑tuned scripts, a Webtoon grabber, and a **two‑pass workflow** for consistent translations.
+_Fast, local manga OCR + translation with MPS GPU. 🖼️➡️🗣️_
+
+This repository glues together a **fast, local, no‑API manga pipeline** on macOS (M1/M2/M3). It wraps the upstream [manga-image-translator](https://github.com/zyddnys/manga-image-translator) with Mac‑tuned scripts, a Webtoon grabber, and a **two‑pass workflow** for consistent translations.
 
 > ⚠️ This repo does **not vendor upstream code**. It fetches the original project during bootstrap.  
 > Full credit to upstream authors: [zyddnys/manga-image-translator](https://github.com/zyddnys/manga-image-translator).
@@ -251,6 +252,19 @@ bash scripts/mit_run.sh --use-gpu-limited --overwrite -v
 # Two-pass on all chapters
 for d in samples_in/naver_*; do bash scripts/mit_two_pass.sh --input "$d"; done
 ```
+
+---
+
+## 📈 Performance
+
+- Rendering uses Apple Silicon GPU via MPS. During rendering, Activity Monitor shows high GPU utilization.
+- Translating 114 images completes in about 6.3 minutes on a typical Apple Silicon Mac (your mileage may vary by model and settings).
+
+<p align="center">
+  <img src="pics/Activity%20Monitor.png" alt="GPU usage during rendering (Activity Monitor)" width="520" />
+  <br/>
+  <sub>Activity Monitor — GPU usage during rendering</sub>
+</p>
 
 ---
 

@@ -70,3 +70,4 @@ dicts/*.txt
 PROGRESS.md
 terminal_log.txt
 diff between third_party and third_party_FRESH.txt
+*.yaml
