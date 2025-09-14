@@ -99,7 +99,48 @@ PY
   fi
 fi
 
+# Apply custom patches
+echo "[3d/7] Applying custom patches"
+sed -i.bak "s/'kn': 'kor_Hang'/'ko': 'kor_Hang'/" "$MIT_DIR/manga_translator/translators/nllb.py"
+sed -i.bak "/g_parser.add_argument('--context-size', default=0, type=int, help='Pages of context are needed for translating the current page')/a g_parser.add_argument('--external-trans-dir', default=None, type=str, help='Directory containing per-image translations as JSON arrays named <basename>_translations.json')" "$MIT_DIR/manga_translator/args.py"
+sed -i.bak "/self.load_text = params.get('load_text', False)/a \
+        # External per-image translations directory (JSON arrays)\
+        self.external_trans_dir = params.get('external_trans_dir', None)\
+        self.current_input_basename = None" "$MIT_DIR/manga_translator/manga_translator.py"
+sed -i.bak "/if config.translator.translator == Translator.none:/a \
+        # External per-image translations: if provided, load and apply, skipping MT\
+        if getattr(self, 'external_trans_dir', None):\
+            try:\
+                if self.current_input_basename:\
+                    p = os.path.join(self.external_trans_dir, f\"{self.current_input_basename}_translations.json\")\
+                    if os.path.exists(p):\
+                        with open(p, 'r', encoding='utf-8') as f:\
+                            translated_sentences = json.load(f)\
+                        for region, translation in zip(ctx.text_regions, translated_sentences):\
+                            region.translation = translation\
+                            region.target_lang = config.translator.target_lang\
+                            region._alignment = config.render.alignment\
+                            region._direction = config.render.direction\
+                        return ctx.text_regions
+            except Exception as e:\
+                logger.warning(f"Failed to load external translations: {e}")" "$MIT_DIR/manga_translator/manga_translator.py"
+sed -i.bak "/# dispatch(chain, queries, translator_config=None, use_mtpe=False, args=None, device='cpu')/a \
+            translated_sentences = await dispatch_translation(\
+                config.translator.translator_gen,\\
+                queries,\\
+                use_mtpe=self.use_mtpe,\\
+                args=ctx,\\
+                device='cpu' if self._gpu_limited_memory else self.device,\\
+            )" "$MIT_DIR/manga_translator/mode/local.py"
+sed -i.bak "/# 直接翻译图片，不再需要传递文件名/a \
+            try:\
+                # Provide basename to core for external translation lookup\
+                self.current_input_basename = os.path.splitext(os.path.basename(path))[0]\
+            except Exception:\
+                self.current_input_basename = None" "$MIT_DIR/manga_translator/mode/local.py"
+
 echo "[4/7] Install project dependencies"
+
 pip install -r "$MIT_DIR/requirements.txt"
 
 echo "[5/7] Install CTranslate2 + tooling"
