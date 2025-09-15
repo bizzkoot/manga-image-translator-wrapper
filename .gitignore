@@ -35,7 +35,7 @@ aggregated/
 models/
 
 # Upstream third_party checkout (created by bootstrap)
-third_party/
+#third_party/
 Try*/
 
 # Node/mermaid artifacts (optional)
